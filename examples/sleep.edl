@@ -1,0 +1,17 @@
+define exp 睡觉 {
+  time: 工作时间,
+  role: any,
+  place: 深大,
+  process: start => "wash&brush" => (
+    if "工作日": "设置闹钟"
+  ) => "爬上床" => end
+}
+
+define time 工作时间 {
+  period: "9:00-12:00"
+}
+
+define place 深大 {
+  addr: "中国广东省深圳市南山区南海大道3688号",
+  link: "http://www.szu.edu.cn"
+}
