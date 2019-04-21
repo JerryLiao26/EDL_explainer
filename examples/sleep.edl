@@ -3,7 +3,7 @@ define exp 睡觉 {
   role: any,
   place: 深大,
   process: start => "wash&brush" => (
-    if "工作日": "设置闹钟"
+    if "工作日" do "设置闹钟"
   ) => "爬上床" => end
 }
 

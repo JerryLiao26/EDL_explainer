@@ -2,13 +2,18 @@ package main
 
 var superWord = [...]string{"define"}
 var typeWord = [...]string{"exp", "time", "place", "role"}
-var keyWord = [...]string{"time", "place", "role", "process", "input", "output", "addr", "link"}
-var preWord = [...]string{"any", "start", "end", "if", "elif", "else"}
+var keyWord = [...]string{"time", "place", "role", "process", "input", "output", "period", "exact", "last", "addr", "link", "title"}
+var preWord = [...]string{"any", "start", "end", "if", "elif", "else", "do"}
 
 var expRequired = [...]string{"time", "place", "role", "process", "@input", "@output"}
 var timeRequired = [...]string{"@period", "@exact", "@last"}
 var placeRequired = [...]string{"@addr", "@link"}
 var roleRequired = [...]string{"title"}
+
+type parseError struct {
+	Period      string `json:period`
+	Description string `json:desc`
+}
 
 type wordNode struct {
 	Name      string     `json:"name"`
