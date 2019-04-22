@@ -23,7 +23,7 @@ func main() {
 	if helpCommand {
 		flag.Usage()
 	} else if analyseCommand != "" {
-		analyseCliHandler()
+		analyseCliHandler(analyseCommand)
 	} else if extractCommand != "" {
 		extractCliHandler(extractCommand)
 	} else if explainCommand != "" && explainTarget != "" {

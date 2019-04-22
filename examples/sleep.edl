@@ -2,9 +2,11 @@ define exp 睡觉 {
   time: 工作时间,
   role: any,
   place: 深大,
-  process: start => "wash&brush" => (
-    if "工作日" do "设置闹钟"
-  ) => "爬上床" => end
+  process: start => "洗漱" => [
+    (if "工作日" do "设置闹钟")
+    (if "休息日" do "关闭闹钟")
+    (if "生病" do "调晚闹钟")
+  ] => "爬上床" => end
 }
 
 define time 工作时间 {

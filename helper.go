@@ -97,6 +97,37 @@ func validateType(typeName string) bool {
 	return false
 }
 
+func unwrap(content string) string {
+	return content[1:(len(content) - 1)]
+}
+
+func wrapByDoubleQuotes(content string) bool {
+	if strings.HasPrefix(content, "\"") && strings.HasSuffix(content, "\"") && len(strings.Split(content, "\"")) == 3 {
+		return true
+	}
+
+	return false
+}
+
+func wrapBySquareBrackets(content string) bool {
+	if strings.HasPrefix(content, "[") && strings.HasSuffix(content, "]") && len(strings.Split(content, "[")) == len(strings.Split(content, "]")) {
+		return true
+	}
+
+	return false
+}
+
+func fullyContains(str string, substr string) bool {
+	if strings.Contains(str, substr) {
+		newStr := strings.Replace(str, substr, "", -1)
+		if strings.Contains(newStr, ",,") || strings.HasPrefix(newStr, ",") || strings.HasSuffix(newStr, ",") || newStr == "" {
+			return true
+		}
+	}
+
+	return false
+}
+
 func stringifyParseError(pe *parseError) string {
 	return "Error during " + pe.Period + ": " + pe.Description
 }
@@ -114,8 +145,33 @@ func stringifyWordNodes(group []wordNode) string {
 		}
 	}
 
-	println(jsonString)
-	jsonString = jsonString[:(len(jsonString) - 1)] + "]"
+	if len(jsonString) == 1 {
+		jsonString = ""
+	} else {
+		jsonString = jsonString[:(len(jsonString)-1)] + "]"
+	}
+
+	return jsonString
+}
+
+func stringifyExpNodes(group []expNode) string {
+	var jsonString = "["
+
+	for _, x := range group {
+		stream, err := json.Marshal(x)
+
+		if err != nil {
+			fmt.Println("error:", err)
+		} else {
+			jsonString += string(stream) + ","
+		}
+	}
+
+	if len(jsonString) == 1 {
+		jsonString = ""
+	} else {
+		jsonString = jsonString[:(len(jsonString)-1)] + "]"
+	}
 
 	return jsonString
 }
