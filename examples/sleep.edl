@@ -1,19 +1,37 @@
 define exp 睡觉 {
   time: 工作时间,
-  role: any,
+  role: 我,
   place: 深大,
-  process: start => "洗漱" => [
-    (if "工作日" do "设置闹钟")
+  process: start => "收拾课本" => "关电脑" => "洗漱" => [
+    (if "工作日" do 调闹钟)
     (if "休息日" do "关闭闹钟")
     (if "生病" do "调晚闹钟")
-  ] => "爬上床" => end
+  ] => "爬上床" => 刷朋友圈 => "关灯" => end
 }
 
 define time 工作时间 {
   period: "9:00-12:00"
 }
 
+define role 我 {
+  title: "学生"
+}
+
 define place 深大 {
   addr: "中国广东省深圳市南山区南海大道3688号",
-  link: "http://www.szu.edu.cn"
+  link: "https://www.szu.edu.cn"
+}
+
+define exp 刷朋友圈 {
+  time: any,
+  role: 我,
+  place: any,
+  process: start => "打开手机" => "打开微信" => "点击朋友圈" => end
+}
+
+define exp 调闹钟 {
+  time: any,
+  role: 我,
+  place: any,
+  process: start => "打开手机" => "打开闹钟" => "修改闹钟" => "保存修改" => end
 }

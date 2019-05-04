@@ -57,6 +57,11 @@ func validateName(name string) bool {
 	var preservedWords []string
 	var prefixedName = "@" + name
 
+	// Not empty
+	if name == "" {
+		return false
+	}
+
 	// Illegal Characters
 	for i := 0; i <= 126; i++ {
 		if (i >= 65 && i <= 90) || i == 95 || (i >= 97 && i <= 122) {
@@ -146,7 +151,7 @@ func stringifyWordNodes(group []wordNode) string {
 	}
 
 	if len(jsonString) == 1 {
-		jsonString = ""
+		jsonString = "[]"
 	} else {
 		jsonString = jsonString[:(len(jsonString)-1)] + "]"
 	}
@@ -168,7 +173,7 @@ func stringifyExpNodes(group []expNode) string {
 	}
 
 	if len(jsonString) == 1 {
-		jsonString = ""
+		jsonString = "[]"
 	} else {
 		jsonString = jsonString[:(len(jsonString)-1)] + "]"
 	}

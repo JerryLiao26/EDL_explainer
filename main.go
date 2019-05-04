@@ -27,7 +27,7 @@ func main() {
 	} else if extractCommand != "" {
 		extractCliHandler(extractCommand)
 	} else if explainCommand != "" && explainTarget != "" {
-		explainCliHandler()
+		explainCliHandler(explainCommand, explainTarget)
 	} else if serveCommand != "" {
 		serveMain(serveCommand)
 	} else {
